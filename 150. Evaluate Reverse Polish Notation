@@ -1,0 +1,52 @@
+class Solution {
+    public int evalRPN(String[] tokens) {
+     int len=tokens.length;
+      Stack<Integer> stk =new Stack<Integer>();
+      String str;
+      int x,y;
+      for(int i=0;i<len;i++)
+      {
+          str=tokens[i];
+          if(str.length()==1)
+          {
+              if(str.charAt(0)<48 || str.charAt(0)>57)
+              {  if(stk.size()>1)
+                 { 
+                     //System.out.println("IF1");
+                     y=stk.pop();
+                 x=stk.pop();
+                 if(str.equals("*"))
+                 stk.push(x*y);
+                 else if(str.equals("+"))
+                 stk.push(x+y);
+                 else if(str.equals("-"))
+                 stk.push(x-y);
+                 else if(str.equals("%"))
+                 stk.push(x%y);
+                 else if(str.equals("/"))
+                 stk.push(x/y);
+                 else if(str.equals("^"))
+                 stk.push(x^y);
+                 }
+              }
+              else
+              {
+                 // System.out.println("IF2");
+                  stk.push(Integer.parseInt(str));
+              }
+
+          }
+          else{
+              //System.out.println("IF3");
+              stk.push(Integer.parseInt(str));
+          }
+          //System.out.println("The stack is");
+ 
+      }
+     
+      return(stk.pop());
+
+
+
+    }
+}
