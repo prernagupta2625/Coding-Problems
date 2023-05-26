@@ -139,7 +139,7 @@ class Solution {
             maxgcd=gcd;
             maxnode=node.data;
         }
-         //System.out.println("hello"+node.data+" "+maxgcd+"gcd"+gcd);
+         
        }
       
        if(node.left!=null)
@@ -150,7 +150,7 @@ class Solution {
     }
     public int calgcd(int a,int b)
     {
-        //System.out.println("Hey");
+      
         if(a==0)
         return b;
         else if(b==0)
