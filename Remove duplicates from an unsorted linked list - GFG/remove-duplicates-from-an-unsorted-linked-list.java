@@ -1,6 +1,7 @@
 //{ Driver Code Starts
 /* package whatever; // don't place package name! */
 import java.util.*;
+import java.io.*;
 class Node
 {
     int data;
@@ -29,46 +30,49 @@ class Remove_Duplicate_From_LL
 	  }
 	}
 
-      void printList()
+      void printList(PrintWriter out)
     {
         Node temp = head;
         while (temp != null)
         {
-           System.out.print(temp.data+" ");
+           out.print(temp.data+" ");
            temp = temp.next;
         }  
-        System.out.println();
+        out.println();
     }
 	
 	/* Drier program to test above functions */
-	public static void main(String args[])
+	public static void main(String args[])throws IOException
     {
        
         
         /* Constructed Linked List is 1->2->3->4->5->6->
            7->8->8->9->null */
-         Scanner sc = new Scanner(System.in);
-		 int t=sc.nextInt();
+         BufferedReader in=new BufferedReader(new InputStreamReader(System.in));
+         PrintWriter out=new PrintWriter(System.out);
+		 int t=Integer.parseInt(in.readLine().trim());
 		  
 		 while(t>0)
          {
-			int n = sc.nextInt();
+			int n = Integer.parseInt(in.readLine().trim());
 			Remove_Duplicate_From_LL llist = new Remove_Duplicate_From_LL();
-			int a1=sc.nextInt();
+			String s[]=in.readLine().trim().split(" ");
+			int a1=Integer.parseInt(s[0]);
 			Node head= new Node(a1);
             llist.addToTheLast(head);
             for (int i = 1; i < n; i++) 
 			{
-				int a = sc.nextInt(); 
+				int a = Integer.parseInt(s[i]); 
 				llist.addToTheLast(new Node(a));
 			}
 		//llist.printList();	
         Solution g = new Solution();
 		llist.head = g.removeDuplicates(llist.head);
-		llist.printList();
+		llist.printList(out);
 		
         t--;		
         }
+        out.close();
     }
 }
 
@@ -92,22 +96,25 @@ class Solution
     //Function to remove duplicates from unsorted linked list.
     public Node removeDuplicates(Node head) 
     {
-         Node ptr=head;
-         
-         Map<Integer,Integer> mp=new HashMap<Integer,Integer>();
-         mp.put(head.data,1);
-         while(ptr.next!=null)
+         // Your code here
+         Node curr=head,prev=null;
+         HashSet<Integer> hs=new HashSet<Integer>();
+         while(curr!=null)
          {
-             if(mp.containsKey(ptr.next.data))
+             int num=curr.data;
+             if(hs.contains(num))
              {
-                 ptr.next=ptr.next.next;
-             }else
-             {
-                 mp.put(ptr.next.data,1);
-                 ptr=ptr.next;
+                 
+                 prev.next=curr.next;
+                 curr=curr.next;
              }
-             
+             else
+             {
+                 hs.add(num);
+                 prev=curr;
+                 curr=curr.next;
+             }
          }
-         return(head);
+         return head;
     }
 }
