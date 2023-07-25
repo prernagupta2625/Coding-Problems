@@ -29,7 +29,7 @@ class Solution
             }
         }
         int tmp;
-        //System.out.println("start "+start+" end "+end);
+       
         int ind=start;
         if(start<end)
         {
