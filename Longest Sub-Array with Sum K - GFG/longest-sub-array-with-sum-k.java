@@ -50,23 +50,23 @@ class Solution{
     
    
     // Function for finding maximum and value pair
-    public static int lenOfLongSubarr (int A[], int N, int k) {
+    public static int lenOfLongSubarr (int A[], int N, int K) {
         //Complete the function
-        int max=0,sum=0;
         HashMap<Integer,Integer> hm=new HashMap<Integer,Integer>();
-        hm.put(0,-1);
+        int sum=0,max=0;
         for(int i=0;i<N;i++)
         {
             sum=sum+A[i];
-            if(hm.containsKey(sum-k))
+            if(sum==K)
+            max=Math.max(max,i+1);
+            if(hm.containsKey(sum-K))
             {
-                max=Math.max(max,i-hm.get(sum-k));
+                max=Math.max(max,i-hm.get(sum-K));
             }
             if(!hm.containsKey(sum))
             {
                 hm.put(sum,i);
             }
-            
         }
         return max;
     }
