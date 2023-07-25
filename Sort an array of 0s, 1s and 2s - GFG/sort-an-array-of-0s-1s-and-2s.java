@@ -10,48 +10,62 @@ import java.util.*;
 
 class Solution
 {
-    public static void sort012(int nums[], int n)
+    public static void sort012(int a[], int n)
     {
         // code here 
-       int start=0,end=nums.length-1,tmp;
-        for(int i=0;i<nums.length;)
+        int start=-1,end=-2;
+        for(int i=0;i<n;i++)
         {
-            if(i>end)
+            if(a[i]!=0)
+            {start=i;
             break;
-            
-            if(nums[i]==0)
+            }
+        }
+        for(int i=n-1;i>=0;i--)
+        {
+            if(a[i]!=2)
+            {end=i;
+            break;
+            }
+        }
+        int tmp;
+        //System.out.println("start "+start+" end "+end);
+        int ind=start;
+        if(start<end)
+        {
+    while(ind<=end )
+        {
+            if(a[ind]==0)
             {
-                if(i!=start)
+                tmp=a[ind];
+                a[ind]=a[start];
+                a[start]=tmp;
+                start++;
+                while(a[start]==0)
+                start++;
+                if(ind<start)
                 {
-               tmp=nums[i];
-               nums[i]=nums[start];
-               nums[start]=tmp;
-               
+                    ind=start;
                 }
-                else
-                i++;
-                start+=1;
                 
             }
-            else if(nums[i]==2)
+            else if(a[ind]==2)
             {
-                if(i!=end)
+                tmp=a[ind];
+                a[ind]=a[end];
+                a[end]=tmp;
+                end--;
+                while(a[end]==2)
                 {
-               tmp=nums[i];
-               nums[i]=nums[end];
-               nums[end]=tmp;
-              
-                }else
-                i++;
-                 end-=1;
-                 
+                    end--;
+                }
             }
-            else i++;
-
+            else ind++;
+            //System.out.println("start "+start+" end "+end);
         }
-    
+        }
+        
     }
-   
 }
 
 //{ Driver Code Starts.
