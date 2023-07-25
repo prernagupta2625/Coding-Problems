@@ -67,27 +67,32 @@ class Solution
 	static int findLongestConseqSubseq(int arr[], int N)
 	{
 	   // add your code here
-	   Arrays.sort(arr);
-	   int num=arr[0],len=0,max=0;
+	   int count=0,max=0;
+	   HashSet<Integer> hs=new HashSet<Integer>();
 	   for(int i=0;i<N;i++)
 	   {
-	       if(arr[i]>num)
+	       hs.add(arr[i]);
+	   }
+	   for(int j=0;j<N;j++)
+	   {
+	       count=1;
+	       int num=arr[j];
+	       if(!hs.contains(arr[j]-1))
 	       {
-	           len=1;
-	           num=arr[i]+1;
+	           while(true)
+	           {
+	               if(!hs.contains(num+1))
+	               {
+	                   break;
+	               }
+	               else
+	               {
+	                   count++;
+	                   num=num+1;
+	               }
+	           }
 	       }
-	       else if(num==arr[i])
-	       {
-	           len+=1;
-	           num=num+1;
-	       }
-	       int j=i+1;
-	       while( j<N && arr[j]==arr[i] )
-	       {
-	           j++;
-	       }
-	       j--;
-	       max=Math.max(max,len);
+	       max=Math.max(max,count);
 	   }
 	   return max;
 	}
