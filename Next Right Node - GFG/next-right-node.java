@@ -108,44 +108,40 @@ class GfG {
 //User function Template for Java
 
 class Solution{
-    static Node ans;
 	Node nextRight(Node root, int key)
     {
-		ans=null;
-		Solution obj=new Solution();
+		//Write your code here
 		Queue<Node> que=new LinkedList<>();
 		que.add(root);
 		que.add(null);
-		obj.traverse(que,key);
-		return(ans);
-    }
-    void traverse(Queue<Node> que, int key)
-    {
-        if(que.peek()!=null)
-        {
-            while(que.peek()!=null)
-            {
-                Node n=que.remove();
-                if(n.data==key)
-                {  if(que.peek()!=null)
-                    ans=que.remove();
-                    else
-                    ans=new Node(-1);
-                    break;
-                }
-                else{
-                if(n.left!=null)
-                que.add(n.left);
-                if(n.right!=null)
-                que.add(n.right);
-                }
-            }
-            if(que.peek()==null)
-            {
-                que.remove();
-                que.add(null);
-            }
-            traverse(que,key);
-        }
+		Node node=new Node(-1);
+		int f=0;
+		while(que.peek()!=null)
+		{
+		    while(que.peek()!=null)
+		    {
+		        Node n=que.remove();
+		        if(n.data==key)
+		        {
+		            if(que.peek()!=null)
+		            {
+		                node=que.remove();
+		                f=1;
+		                break;
+		            }
+		        }
+		        if(n.left!=null)
+		        que.add(n.left);
+		        if(n.right!=null)
+		        que.add(n.right);
+		        
+		    }
+		    if(f==1)
+		    break;
+		    que.remove();
+		    que.add(null);
+		    
+		}
+		return node;
     }
 }
