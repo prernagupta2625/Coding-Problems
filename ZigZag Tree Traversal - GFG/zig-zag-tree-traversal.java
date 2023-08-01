@@ -124,50 +124,50 @@ public class GFG2
 class GFG
 {
     //Function to store the zig zag order traversal of tree in a list.
-    static ArrayList<Integer> arr=new ArrayList<Integer>();
-    static boolean flag;
 	ArrayList<Integer> zigZagTraversal(Node root)
 	{
+	    //Add your code here.
+	    int f=0;
 	    Queue<Node> que=new LinkedList<>();
 	    que.add(root);
 	    que.add(null);
-	    flag=true;
-	    GFG obj=new GFG();
-	    arr.clear();
-	    obj.zigzag(que);
-	    return(arr);
-	}
-	void zigzag(Queue<Node> que)
-	{
-	    if(que.peek()!=null)
+	    ArrayList<Integer> list=new ArrayList<Integer>();
+	    while(que.peek()!=null)
 	    {
-	        ArrayList<Integer> pre=new ArrayList<Integer>();
+	        ArrayList<Integer> arr=new ArrayList<>();
+	        arr.clear();
 	        while(que.peek()!=null)
 	        {
-	            Node n=que.remove();
-	            if(n.left!=null)
-	            que.add(n.left);
-	            if(n.right!=null)
-	            que.add(n.right);
-	            pre.add(n.data);
-	            if(que.peek()==null)
-	            que.add(null);
+	            Node node=que.remove();
+	            arr.add(node.data);
+	            if(node.left!=null)
+	            que.add(node.left);
+	            if(node.right!=null)
+	            que.add(node.right);
+	            
+	            
 	        }
-	        if(que.peek()==null)
-	        que.remove();
-	        if(flag==true)
-	        arr.addAll(pre);
+	        if(f==0)
+	        {
+	            for(int i=0;i<arr.size();i++)
+	            {
+	                list.add(arr.get(i));
+	            }
+	        f=1;
+	        }
 	        else
 	        {
-	            Collections.reverse(pre);
-	            arr.addAll(pre);
+	           for(int j=arr.size()-1;j>=0;j--)
+	           {
+	               list.add(arr.get(j));
+	           }
+	            f=0;
 	        }
-	        if(flag==true)
-	        flag=false;
-	        else
-	        flag=true;
-	        zigzag(que);
+	        que.remove(null);
+	        que.add(null);
 	        
 	    }
+	    return list;
+	    
 	}
 }
