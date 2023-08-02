@@ -31,52 +31,30 @@ class GFG
 
 
 //User function Template for Java
-class Node{
-    int data;
-    Node left,right;
-    Node(int data)
-    {
-        this.data=data;
-        this.left=null;
-        this.right=null;
-    }
-}
 
 class Solution
 {
-    static ArrayList<Integer> arr=new ArrayList<Integer>();
+    static int ind=0;
     public int[] sortedArrayToBST(int[] nums)
     {
-        arr.clear();
-        Solution obj=new Solution();
-        int ar[]=new int[nums.length];
-        obj.preorder(ar,0,obj.cal(nums,0,nums.length-1));
-        for(int i=0;i<arr.size();i++)
-        {
-            ar[i]=arr.get(i);
-        }
-        return(ar);
+        // Code here 
+        int start=0,end=nums.length-1;
+        ind=0;
+        int arr[]=new int[nums.length];
+        func(nums,start,end,arr);
+        return arr;
         
     }
-    Node cal(int[] nums,int start,int end)
+    public static void func(int nums[],int start,int end,int arr[])
     {
         if(start>end)
-        return(null);
+        return;
+        
         int mid=(start+end)/2;
-        //System.out.println("mid"+nums[mid]);
-        Node node=new Node(nums[mid]);
-        node.left=cal(nums,start,mid-1);
-        node.right=cal(nums,mid+1,end);
-        return(node);
-    }
-    void preorder(int[]ar,int ind,Node n)
-    {
-        arr.add(n.data);
-        int i=ind+1;
-        if(n.left!=null)
-        preorder(ar,i,n.left);
-        if(n.right!=null)
-        preorder(ar,i,n.right);
+        arr[ind]=nums[mid];
+        ind++;
+        func(nums,start,mid-1,arr);
+        func(nums,mid+1,end,arr);
         
         
     }
