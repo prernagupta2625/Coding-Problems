@@ -114,26 +114,51 @@ class Node
     }
 }
 */
-class Solution
-{
-    // return the Kth largest element in the given BST rooted at 'root'
-static ArrayList<Integer> arr=new ArrayList<Integer>();
-    public int kthLargest(Node root,int K)
-    {
-       arr.clear();
-       Solution obj=new Solution();
-       obj.traversal(root);
-       int num=arr.get(K-1);
-       return(num);
-       
+
+class Solution {
+    // Return the Kth smallest element in the given BST
+    static Node n=null;
+    public int kthLargest(Node root, int K) {
+        // Write your code here
+        n=null;
+        func(root,new int[]{K-1});
+        int num;
+        if(n!=null)
+         num=n.data;
+        else
+        num=-1;
+        return num;
+        
     }
-    void traversal(Node node)
+    static void func(Node node,int pos[])
     {
-        if(node==null)
+        if(node.left==null && node.right==null)
+        {
+            if(pos[0]==0)
+       {
+           pos[0]-=1;
+           n=node;
+           return;
+       }
+            pos[0]-=1;
         return;
-        traversal(node.right);
-        arr.add(node.data);
-        traversal(node.left);
+        }
+       if(node.right!=null)
+       {
+           func(node.right,pos);
+       }
+       if(pos[0]==0)
+       {
+           pos[0]-=1;
+           n=node;
+           return;
+       }
+       else
+       pos[0]-=1;
+       if(node.left!=null)
+       {
+           func(node.left,pos);
+       }
         
     }
 }
