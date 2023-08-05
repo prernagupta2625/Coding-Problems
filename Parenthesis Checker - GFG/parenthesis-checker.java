@@ -37,37 +37,22 @@ class Solution
     //Function to check if brackets are balanced or not.
     static boolean ispar(String x)
     {
-        Stack<Character> s=new Stack<Character>();
-        for(int j=0;j<x.length();j++)
+        // add your code here
+        Stack<Character> st=new Stack<Character>();
+        for(int i=0;i<x.length();i++)
         {
-            s.push(x.charAt(j));
-        }
-        Stack<Character> emp=new Stack<Character>();
-        Solution obj=new Solution();
-       return obj.check(s,emp);
-    }
-    boolean check(Stack<Character> s,Stack<Character> emp)
-    {
-        while(!s.empty())
-        {
-            if(s.peek()==')'||s.peek()=='}'||s.peek()==']')
-            emp.push(s.pop());
-            else if(s.peek()=='('||s.peek()=='{'||s.peek()=='[')
+            char ch=x.charAt(i);
+            if(st.isEmpty() || ch=='('|| ch=='{'|| ch=='[')
+            st.push(ch);
+            else
             {
-                if(emp.empty())
-                return false;
-                if((s.peek()=='('&& emp.peek()==')')||s.peek()=='{'&& emp.peek()=='}'||
-               ( s.peek()=='['&& emp.peek()==']'))
-                {
-                    s.pop();
-                    emp.pop();
-                }
+                 if((st.peek()=='(' && ch==')')||(st.peek()=='{' && ch=='}')||(st.peek()=='[' && ch==']'))
+                st.pop();
                 else
                 return false;
-                
             }
         }
-        if(s.empty()&&emp.empty())
+        if(st.isEmpty())
         return true;
         else
         return false;
