@@ -39,30 +39,27 @@ class Solution
         long ans[]=new long[n];
         for(int i=n-1;i>=0;i--)
         {
-             long num=arr[i];
+            long num=arr[i];
             if(st.isEmpty())
-            {
-                ans[i]=-1;
-            }else
-            {
-                while(!st.isEmpty())
-                {
-                    if(st.peek()>num)
-                   { ans[i]=st.peek();
-                     break;
-                   }
-                   else
-                   {
-                       st.pop();
-                   }
-                }
-                if(st.isEmpty())
-                ans[i]=-1;
+            {ans[i]=-1;
+            
             }
-            st.push(num);
+            else
+            {
+            while(!st.isEmpty())
+            {
+                if(st.peek()>arr[i])
+               { ans[i]=st.peek();
+               break;
+               }
+                else
+                st.pop();
+            }
+            if(st.isEmpty())
+            ans[i]=-1;
+            }
+            st.push(arr[i]);
         }
         return ans;
-        
-        
     } 
 }
