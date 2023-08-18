@@ -42,15 +42,34 @@ class Solution
         for(int i=0;i<x.length();i++)
         {
             char ch=x.charAt(i);
-            if(st.isEmpty() || ch=='('|| ch=='{'|| ch=='[')
+            if(ch=='{'||ch=='['||ch=='(')
             st.push(ch);
-            else
+            else 
             {
-                 if((st.peek()=='(' && ch==')')||(st.peek()=='{' && ch=='}')||(st.peek()=='[' && ch==']'))
+                if(st.isEmpty())
+                return false;
+                if(ch==')' )
+            {if( st.peek()=='(')
+              st.pop();
+              else
+            return false;
+            }
+            else if(ch=='}')
+            {
+                if( st.peek()=='{')
                 st.pop();
                 else
                 return false;
             }
+            else if(ch==']')
+            {
+                if(st.peek()=='[')
+                st.pop();
+                else
+                return false;
+            }
+            }
+            
         }
         if(st.isEmpty())
         return true;
