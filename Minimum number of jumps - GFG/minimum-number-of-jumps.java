@@ -29,23 +29,38 @@ class GFG
 class Solution{
     static int minJumps(int[] arr){
         // your code here
-        int maxstep=0,steps=0,jump=0,cs;
-        for(int i=0;i<arr.length;i++)
+         int start=1,end=arr[0],n=arr.length;
+        int count=0,f=0;
+        if(n==1)
+        return 0;
+        while(start <= end )
         {
-            cs=i+arr[i];
-             maxstep=Math.max(cs,maxstep);
-             if(steps>0)
-             steps-=1;
-             if(maxstep==i && i<arr.length-1 && arr[i]<=0)
-             return -1;
-            if(steps==0 || i==arr.length-1)
+            if(end>=n-1)
+             return 1;
+            int i=start,sum=0,ind=-1;
+            count++;
+            while(i<=end)
             {
-                jump+=1;
-                steps=maxstep-i;
-                
+                if(i+arr[i]>sum)
+                {
+                    sum=i+arr[i];
+                    ind=i;
+                    if(sum>=n-1)
+                    {
+                        f=1;
+                        count++;
+                        return count;
+                        
+                    }
+                }
+                i++;
             }
-           
+            if(f==1)
+            break;
+            start=ind+1;
+            end=ind+arr[ind];
+
         }
-        return jump-1;
+        return -1;
     }
 }
