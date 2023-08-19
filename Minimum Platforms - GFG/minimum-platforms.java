@@ -60,7 +60,8 @@ class Solution
             }
             else
             {
-                count--;
+                //count--;
+                i++;
                 j++;
             }
             max=Math.max(max,count);
