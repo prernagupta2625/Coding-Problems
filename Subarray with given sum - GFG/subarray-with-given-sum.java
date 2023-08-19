@@ -42,41 +42,38 @@ class Solution
     static ArrayList<Integer> subarraySum(int[] arr, int n, int s) 
     {
         // Your code here
-        int start=0,end=-1,sum=0;
-        ArrayList<Integer> list=new ArrayList<Integer>();
-        for(int j=0;j<n;j++)
+        int sum=0,left=0,right;
+        for(int i=0;i<n;i++)
         {
-            sum=sum+arr[j];
-            end++;
-            if(sum==s)
-            {
-               list.add(start+1);
-               list.add(end+1);
-               return list;
-            }
-            else if(sum>s)
-            {
-            
-                while(sum>=s)
-                {
-                    if(sum==s)
-                    {
-                        list.add(start+1);
-                        list.add(end+1);
+             sum=sum+arr[i];
+             right=i;
+             if(sum==s)
+             {
+                 ArrayList<Integer> list=new ArrayList<>();
+                 list.add(left+1);
+                 list.add(right+1);
+                 return list;
+             }
+             else if(sum>s)
+             {
+                 while(sum>s && left<right)
+                 {
+                     sum=sum-arr[left];
+                     left++;
+                     if(sum==s)
+                     {
+                        ArrayList<Integer> list=new ArrayList<>();
+                        list.add(left+1);
+                        list.add(right+1);
                         return list;
-                    }
-                    if(start==end)
-                    {
-                        start=start+1;
-                        sum=0;
-                        break;
-                    }
-                    sum=sum-arr[start];
-                    start+=1;
-                }
-            }
+                     }
+                 }
+             }
+             
+             
         }
-        list.add(-1);
-        return list;
+        ArrayList<Integer> a=new ArrayList<>();
+        a.add(-1);
+        return a;
     }
 }
