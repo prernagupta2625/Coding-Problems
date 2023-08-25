@@ -34,19 +34,20 @@ class GFG
 //User function Template for Java//User function Template for Java
 class Solution{
     ArrayList<Integer> subsetSums(ArrayList<Integer> arr, int N){
-        ArrayList<Integer> ar=new ArrayList<Integer>();
-        Solution obj=new Solution();
-        obj.cal( arr, N,ar, 0,0);
-        return ar;
+        // code here
+        ArrayList<Integer> ans=new ArrayList<>();
+        func(ans,0,arr,0);
+        return ans;
     }
-    public void cal(ArrayList<Integer> arr,int N,ArrayList<Integer> ar,int sum,int ind)
+    public static void func(ArrayList<Integer> ans,int ind,ArrayList<Integer> arr,
+    int sum)
+    {
+        if(ind==arr.size())
         {
-            if(ind==N)
-            ar.add(sum);
-            else
-            {
-                cal(arr,N,ar,sum+arr.get(ind),ind+1);
-                cal(arr,N,ar,sum,ind+1);
-            }
+            ans.add(sum);
+            return;
         }
+        func(ans,ind+1,arr,sum);
+        func(ans,ind+1,arr,sum+arr.get(ind));
+    }
 }
