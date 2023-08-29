@@ -50,9 +50,9 @@ class Solution {
         if(dp[r][c]!=-1)
         return dp[r][c];
         int down=0,right=0;
-        if(r+1<n && grid[r+1][c]==1)
+        if(r+1<n )
         down =func(n,m,grid,r+1,c,dp);
-        if(c+1<m && grid[r][c+1]==1)
+        if(c+1<m )
         right= func(n,m,grid,r,c+1,dp);
         dp[r][c]=(down+right)%1000000007;
         //System.out.println(dp[r][c]+" r "+r+" c "+c);
