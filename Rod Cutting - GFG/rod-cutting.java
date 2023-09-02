@@ -26,31 +26,29 @@ class RodCutting {
 
 
 class Solution{
-    public int cutRod(int price[], int n) {
-        int dp[]=new int[n];
-        Arrays.fill(dp,-1);
-        Solution obj=new Solution();
-        return obj.cal(price,n,dp);
+    public int cutRod(int price[], int len) {
+        //code here
+        int dp[][]=new int[price.length][len+1];
+        for(int i=0;i<price.length;i++)
+         Arrays.fill(dp[i],-1);
+         return func(price,price.length,0,len,dp);
     }
-    public int cal(int price[],int n,int dp[])
+    public static int func(int price[],int n,int ind,int len,int dp[][])
     {
-        if(n==0)
+        if(len==0)
         return 0;
-     if(n==1)
-     return price[n-1];
-     else if(dp[n-1]!=-1)
-     return dp[n-1];
-     else
-     {
-         int val=Integer.MIN_VALUE;
-         for(int i=1;i<=n/2;i++)
-         {
-             val=Math.max(val,cal(price,i,dp)+cal(price,n-i,dp));
-             
-         }
-         val=Math.max(val,price[n-1]);
-         dp[n-1]=val;
-         return val;
-     }
+        if(len<0)
+        return -100000000;
+        if(ind>=n)
+        return -100000000;
+        if(dp[ind][len]!=-1)
+        return dp[ind][len];
+        int take=0,notake=0;
+        if(len>=ind+1)
+        take=price[ind]+func(price,n,ind,len-ind-1,dp);
+        notake=func(price,n,ind+1,len,dp);
+        dp[ind][len]=Math.max(take,notake);
+        return dp[ind][len];
     }
+    
 }
