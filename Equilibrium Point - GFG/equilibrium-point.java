@@ -41,21 +41,19 @@ class Solution {
     public static int equilibriumPoint(long arr[], int n) {
 
         // Your code here
-        long sum=0,s=0;
+        long sum=0,prev=0;
+        int c=-1;
+        for(Long i : arr)
+        sum=sum+i;
         for(int i=0;i<n;i++)
-        {
-            sum=sum+arr[i];
+        if(prev==sum-prev-arr[i])
+        {c=i+1;
+        break;
         }
-        for(int j=0;j<n;j++)
+        else
         {
-            long num=sum-s-arr[j];
-            //System.out.println("num"+num);
-            if(s==num)
-            {
-                return j+1;
-            }
-            s=s+arr[j];
+            prev=prev+arr[i];
         }
-        return -1;
+        return c;
     }
 }
