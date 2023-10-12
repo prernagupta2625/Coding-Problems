@@ -27,29 +27,41 @@ class GFG
 
 class Solution{
     int longestUniqueSubsttr(String S){
-        
         HashMap<Character,Integer> hm=new HashMap<>();
-        int start=0,end=0,max=0;
+        int left=0,right=-1,max=0;
         for(int i=0;i<S.length();i++)
         {
             char ch=S.charAt(i);
             if(hm.containsKey(ch))
             {
-               while(hm.containsKey(ch))
-               {
-                   hm.remove(S.charAt(start++));
-                   
-               }
-               end=i;
-               hm.put(ch,i);
+                while(left<=right)
+                {
+                    char c=S.charAt(left);
+                    if(S.charAt(left)==ch)
+                    {
+                        hm.remove(ch);
+                        left++;
+                        break;
+                    }
+                    else
+                    {
+                        if(hm.containsKey(S.charAt(left)))
+                       {  if(hm.get(c)==1)
+                       hm.remove(c);
+                       else
+                           hm.put(c,hm.get(c)-1);
+                       }
+                        
+                        left++;
+                    }
+                    
+                }
+                
             }
-            else
-            {
-                hm.put(ch,i);
-                end=i;
-            }
-            //System.out.println("start"+start+"end"+end);
-            max=Math.max(max,end-start+1);
+        
+            hm.put(ch,1);
+            right=i;
+            max=Math.max(max,right-left+1);
         }
         return max;
     }
