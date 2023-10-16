@@ -40,24 +40,34 @@ class Solution
     public static boolean isAnagram(String a,String b)
     {
         
-        char ch[]=a.toCharArray();
-        char ch2[]=b.toCharArray();
-        Arrays.sort(ch);
-        Arrays.sort(ch2);
-        if(ch.length!=ch2.length)
+        // Your code here
+        HashMap<Character,Integer> hm=new HashMap<>();
+        if(a.length()!=b.length())
         return false;
-        else
+        for(int i=0;i<a.length();i++)
         {
-            for(int j=0;j<ch.length;j++)
-            {
-                if(ch[j]!=ch2[j])
-                {
-                    return false;
-                }
-            }
-            return true;
+            char ch=a.charAt(i);
+            hm.put(ch,hm.getOrDefault(ch,0)+1);
+            
         }
-        
+        for(int i=0;i<b.length();i++)
+        {
+            char ch=b.charAt(i);
+            if(hm.containsKey(ch))
+            {
+                if(hm.get(ch)==1)
+                hm.remove(ch);
+                else
+                hm.put(ch,hm.get(ch)-1);
+                
+            }
+            else
+            {
+                return false;
+            }
+            
+        }
+        return true;
         
     }
 }
