@@ -31,21 +31,18 @@ import java.util.*;
 class Solution {
     int binarysearch(int arr[], int n, int k) {
         // code here
-        int beg=0,end=n-1;
-        while(beg<=end)
-        {
-            int mid=(beg+end)/2;
-            if(arr[mid]==k)
-            return mid;
-            else if(arr[mid]<k)
-            {
-                beg=mid+1;
-            }
-            else
-            {
-                end=mid-1;
-            }
-        }
+        return func(arr,k,0,n-1);
+    }
+    public static int func (int arr[],int k,int beg,int end)
+    {
+        if(beg>end)
         return -1;
+        int mid=(end+beg)/2;
+        if(arr[mid]==k)
+        return mid;
+        else if(k<arr[mid])
+        return func(arr,k,beg,mid-1);
+        else 
+        return func(arr,k,mid+1,end);
     }
 }
